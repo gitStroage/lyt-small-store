@@ -13,7 +13,9 @@
 				</view>
 			</view>
 			<view class="setting" @click="handleUserSetting">
-				<image src="../../static/images/setting.png"></image>
+				<!-- <image src="../../static/images/setting.png"></image> -->
+				<uni-icons class="setting-icon" type="right" size="28" color="#fff"></uni-icons>
+
 			</view>
 		</view>
 		<view class="orders">
@@ -56,9 +58,12 @@
 	</view>
 </template>
 <script>
+	import Mixins from "../../mixins"
 	export default {
+		mixins: [Mixins],
 		data() {
 			return {
+				language: uni.getStorageSync('language') || this._i18n.locale,
 				//#ifdef APP-PLUS
 				isH5Plus: true,
 				//#endif
@@ -120,10 +125,19 @@
 					{
 						name: '联系客服',
 						icon: 'kefu.png',
-						url:"/pages/service/service"
+						url: "/pages/service/service"
 					}
 				],
 			};
+		},
+
+		onShow() {
+			//切换标题
+			uni.setNavigationBarTitle({
+				title: this.$t('navBar.me')
+			});
+			//切换语言
+			this.handleSetTabBarItme()
 		},
 		onLoad() {
 			//加载
@@ -211,11 +225,12 @@
 				flex-flow: wrap;
 				padding-left: 30upx;
 				align-items: center;
+
 				.username {
 					width: 100%;
 					color: #fff;
 					font-size: 36upx;
-					font-weight:bold;
+					font-weight: bold;
 					letter-spacing: $uni-font-space;
 				}
 
@@ -243,6 +258,10 @@
 			image {
 				width: 45upx;
 				height: 45upx;
+			}
+			
+			.set-cion{
+				
 			}
 		}
 	}

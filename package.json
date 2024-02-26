@@ -1,0 +1,23 @@
+{
+  "name": "uni-lyt-mall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitStroage/lyt-small-store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gitStroage/lyt-small-store/issues"
+  },
+  "homepage": "https://github.com/gitStroage/lyt-small-store#readme",
+  "dependencies": {
+    "vue-i18n": "^9.9.1"
+  }
+}

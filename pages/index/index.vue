@@ -3,10 +3,14 @@
 		<!-- F1 head-start -->
 		<view class="f1">
 			<view class="page-title">
-				<text>两亚通跨境小店</text>
+				<view class="title">{{$t('index.title')}}</view>
 				<!-- language -->
 				<view class="language">
-					中文
+					<picker mode="selector" :range="langs" range-key="label" :value="index"
+						@change="handleLanguageChange">
+						<!-- <image src="../../static/images/language.png" mode="widthFix"></image> -->
+						{{langs[index].label}}
+					</picker>
 				</view>
 			</view>
 			<!-- 搜索条 -->
@@ -34,14 +38,15 @@
 		<!-- F3 nav-start -->
 		<view class="f3">
 			<view class="category-menu">
-				<view v-for="item in productCategory" :key="item.id" class="category-item"  :data-id="item.id" @click="handleJumpCategory">
+				<view v-for="item in productCategory" :key="item.id" class="category-item" :data-id="item.id"
+					@click="handleJumpCategory">
 					<view class="category-poster">
 						<image :src="item.poster" mode="widthFix"></image>
 					</view>
 					<view class="category-name">
 						{{item.name}}
 					</view>
-					
+
 				</view>
 			</view>
 		</view>
@@ -50,7 +55,7 @@
 		<view class="f4">
 			<view class="flagship-product">
 				<view class="flagship-title">
-					<text>甄选推荐</text>
+					<text> {{$t("index.pick")}}</text>
 				</view>
 				<view class="product-lists">
 					<view class="product-item" v-for="item in flagshipProduct" :key="item.id">
@@ -79,7 +84,7 @@
 				</view>
 				<view class="more-form">
 					<view class="more-btn" @click="handleViewMore">
-						查看更多
+						{{$t('index.more')}}
 					</view>
 				</view>
 			</view>
@@ -96,9 +101,28 @@
 		mapActions,
 		mapMutations
 	} from 'vuex'
+	import Mixins from "../../mixins"
+	import {
+		index
+	} from '../../i18n/langs/en'
 	export default {
+		mixins: [Mixins],
 		data() {
 			return {
+				langs: [{
+						label: "中文",
+						value: "zh-CN"
+					},
+					{
+						label: "English",
+						value: "en"
+					},
+					{
+						label: "မိုန်မာရ်",
+						value: "bur"
+					},
+				],
+				index: 0, //默认
 				indicatorDots: true,
 				autoplay: true,
 				interval: 3000,
@@ -120,38 +144,38 @@
 						img: "../../static/images/banner-4.jpg"
 					},
 				],
-				productCategory:[{
-					id:1,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-01/aad731e470d14e9b841562b7e8bc71d3.png",
-					name:"影音娱乐",
-				},{
-					id:2,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-01/5cad2b3f688d43108f2f8ab53257838d.png",
-					name:"运动健康",
-				},{
-					id:3,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-02/ea0183acdb3a4ebe87e4e4ca55cdcf3b.png",
-					name:"智能手机",
-				},{
-					id:4,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-01/ea67174f07394a32a4d896be04fc3c69.png",
-					name:"耳机音箱",
-				},{
-					id:5,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-01/ea67174f07394a32a4d896be04fc3c69.png",
-					name:"耳机音箱",
-				},{
-					id:6,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-02/ea0183acdb3a4ebe87e4e4ca55cdcf3b.png",
-					name:"智能手机",
-				},{
-					id:7,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-01/5cad2b3f688d43108f2f8ab53257838d.png",
-					name:"运动健康",
-				},{
-					id:8,
-					poster:"https://res.vmallres.com/uomcdn/CN/cms/2024-01/aad731e470d14e9b841562b7e8bc71d3.png",
-					name:"影音娱乐",
+				productCategory: [{
+					id: 1,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-01/aad731e470d14e9b841562b7e8bc71d3.png",
+					name: "影音娱乐",
+				}, {
+					id: 2,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-01/5cad2b3f688d43108f2f8ab53257838d.png",
+					name: "运动健康",
+				}, {
+					id: 3,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-02/ea0183acdb3a4ebe87e4e4ca55cdcf3b.png",
+					name: "智能手机",
+				}, {
+					id: 4,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-01/ea67174f07394a32a4d896be04fc3c69.png",
+					name: "耳机音箱",
+				}, {
+					id: 5,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-01/ea67174f07394a32a4d896be04fc3c69.png",
+					name: "耳机音箱",
+				}, {
+					id: 6,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-02/ea0183acdb3a4ebe87e4e4ca55cdcf3b.png",
+					name: "智能手机",
+				}, {
+					id: 7,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-01/5cad2b3f688d43108f2f8ab53257838d.png",
+					name: "运动健康",
+				}, {
+					id: 8,
+					poster: "https://res.vmallres.com/uomcdn/CN/cms/2024-01/aad731e470d14e9b841562b7e8bc71d3.png",
+					name: "影音娱乐",
 				}],
 				id: "",
 				flagshipProduct: [{
@@ -223,6 +247,19 @@
 		},
 		methods: {
 			...mapMutations(['switchTheme']),
+			//切换语言
+			handleLanguageChange(e) {
+				// console.log(e.detail.value)
+				let index = e.detail.value
+				let lang = this.langs[index].value
+				this.index = index
+				//存储语言
+				this.language = lang
+				this._i18n.locale = lang
+				uni.setStorageSync('language', lang)
+				//切换tabBar 语言
+				this.handleSetTabBarItme()
+			},
 			// 商品类型查询
 			handleJumpCategory(e) {
 				// this.id = e.currentTarget.dataset.id
@@ -231,7 +268,7 @@
 				// 	url: '/pages/search/search?id=' + this.id
 				// })
 				uni.switchTab({
-					url:"/pages/category/category"
+					url: "/pages/category/category"
 				})
 			},
 			//查看详情
@@ -254,6 +291,18 @@
 			// 设置tabbar
 			uni.setTabBarStyle(this.$store.state.themes.tabBar);
 		},
+		onShow() {
+			//匹配语言
+			let langs = this.langs
+			let language = uni.getStorageSync('language') || this._i18n.locale
+			langs.forEach((item, index) => {
+				if (item.value == language) {
+					this.index = index
+				}
+			})
+			//切换语言
+			this.handleSetTabBarItme()
+		}
 	}
 </script>
 
@@ -269,20 +318,22 @@
 			text-align: center;
 			padding: 20upx;
 
-			text {
-				font-size: 1.4rem;
+			.title {
+				font-size: $uni-font-size-lg;
 				color: $uni-inverse-color;
-				line-height: $uni-space-root;
+				line-height: 2.5;
 				letter-spacing: $uni-font-space;
 			}
 
 			.language {
-				color: $uni-inverse-color;
-				letter-spacing: $uni-font-space;
 				position: absolute;
-				right: 40upx;
-				top: 50%;
-				transform: translateY(-50%);
+				right: 30upx;
+				top: 30upx;
+				color: $uni-inverse-color;
+				line-height: 2;
+				padding: 0 12upx;
+				background-color: rgba(0, 0, 0, .1);
+				border-radius: $uni-radius-root;
 			}
 		}
 
@@ -339,21 +390,24 @@
 			background-color: $uni-white;
 			margin-bottom: 20upx;
 			padding: 10upx 0;
+
 			.category-item {
 				width: 25%;
 				padding: 10upx 0;
 				text-align: center;
-				.category-poster{
-					image{
+
+				.category-poster {
+					image {
 						width: 100upx;
 						height: 100upx;
 					}
 				}
-				.category-name{
+
+				.category-name {
 					font-size: 28upx;
 					line-height: 2;
 				}
-				
+
 			}
 		}
 	}
@@ -380,7 +434,7 @@
 						content: "";
 						width: 1.4rem;
 						height: 4upx;
-						background-color: $uni-border-5;
+						background-color: $uni-border-4;
 						position: absolute;
 						top: 50%;
 						transform: translateY(-50%);
@@ -392,7 +446,7 @@
 						content: "";
 						width: 1.4rem;
 						height: 4upx;
-						background-color: $uni-border-5;
+						background-color: $uni-border-4;
 						position: absolute;
 						top: 50%;
 						transform: translateY(-50%);

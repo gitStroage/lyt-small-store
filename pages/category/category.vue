@@ -6,11 +6,12 @@
 
 <script>
 	import CCBeautyCate from "@/components/cc-beautyCate/cc-beautyCate.vue"
-
+	import Mixins from "../../mixins"
 	export default {
 		components: {
 			CCBeautyCate
 		},
+		mixins: [Mixins],
 		data() {
 			return {
 				categoryList: [{
@@ -1017,16 +1018,23 @@
 				})
 			}
 		},
-		onReady(){
-		    //Vuex的方式 
-		    // 设置导航条
-		    uni.setNavigationBarColor(this.$store.state.themes.navBar);
-		    // 设置tabbar
-		    uni.setTabBarStyle(this.$store.state.themes.tabBar); 
+		onReady() {
+			//Vuex的方式 
+			// 设置导航条
+			uni.setNavigationBarColor(this.$store.state.themes.navBar);
+			// 设置tabbar
+			uni.setTabBarStyle(this.$store.state.themes.tabBar);
 		},
-
+		onShow() {
+			//切换标题
+			uni.setNavigationBarTitle({
+				title: this.$t('navBar.category')
+			});
+			//切换语言
+			this.handleSetTabBarItme()
+		},
 		onLoad(option) {
-			
+
 		}
 	}
 </script>

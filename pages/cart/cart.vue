@@ -13,10 +13,12 @@
 
 <script>
 	import shopCar from "@/components/shopCar/shopCar.vue"
+	import Mixins from "../../mixins"
 	export default {
 		components: {
 			shopCar
 		},
+		mixins: [Mixins],
 		data() {
 			return {
 				isCut: true,
@@ -103,6 +105,14 @@
 		    uni.setNavigationBarColor(this.$store.state.themes.navBar);
 		    // 设置tabbar
 		    uni.setTabBarStyle(this.$store.state.themes.tabBar); 
+		},
+		onShow() {
+			//切换标题
+			uni.setNavigationBarTitle({
+				title: this.$t('navBar.cart')
+			});
+			//切换语言
+			this.handleSetTabBarItme()
 		},
 	}
 </script>
